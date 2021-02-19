@@ -6,16 +6,6 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-"""
-    .env has to look like this:
-
-BRIDGE_IP="192.168.0.100"
-TWITCH_NICKNAME="somenick"
-TWITCH_CHANNEL="somechanwithoutthepoundsign"
-TWITCH_OAUTH="oauthtoken"
-TRANSITION_TIME=10
-"""
-
 
 TWITCH_CHAT_SERVER = 'irc.chat.twitch.tv'
 TWITCH_CHAT_SERVER_PORT = 6667
