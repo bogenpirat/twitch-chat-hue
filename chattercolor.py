@@ -1,6 +1,5 @@
 from phue import Bridge
 import colorsys
-import copy
 import irc.bot
 import os
 from dotenv import load_dotenv
@@ -48,9 +47,9 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
         return self.on_pubmsg(c, e)
 
 if __name__ == '__main__':
-    command = { 'transitiontime': TRANSITION_TIME, 'on': True, 'bri': 254 } # transitiontime: decisecs
-    """b = Bridge(BRIDGE_IP)
+    b = Bridge(BRIDGE_IP)
     b.connect()
+
     if not LIGHTS_TO_MANIPULATE:
         LIGHTS_TO_MANIPULATE = b.lights
 
@@ -58,17 +57,20 @@ if __name__ == '__main__':
         rgb = rgbhex2dec(color)
         hsl = colorsys.rgb_to_hsv(rgb[0]/255, rgb[1]/255, rgb[2]/255)
 
-        cmd = copy.deepcopy(command)
-        cmd['hue'] = round(hsl[0] * 360)
-        for l in LIGHTS_TO_MANIPULATE:
-            b.set_light(l.name, command)"""
-    def set_color(color):
-        rgb = rgbhex2dec(color)
-        hsl = colorsys.rgb_to_hsv(rgb[0]/255, rgb[1]/255, rgb[2]/255)
+        hue = round(hsl[0] * 360 * 182.04)
+        sat = round(hsl[1] * 254)
+        bri = round(hsl[2] * 254)
 
-        cmd = copy.deepcopy(command)
-        cmd['hue'] = round(hsl[0] * 360 * 182.04)
-        print(f'command: {cmd}')
+        print(f'sending color rgb{color} => hsb({hue}, {sat}, {bri})')
+
+        lights = b.get_light_objects('name')
+        selected_lights = list(lights.keys())[-2:]
+        for l in selected_lights:
+            lights[l].transitiontime = TRANSITION_TIME
+            lights[l].on = True
+            lights[l].hue = hue
+            lights[l].brightness = bri
+            lights[l].saturation = sat
 
     bot = TwitchBot(TWITCH_NICKNAME, TWITCH_OAUTH, TWITCH_CHANNEL, set_color)
     bot.start()
