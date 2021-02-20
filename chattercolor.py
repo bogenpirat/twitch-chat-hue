@@ -44,6 +44,9 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
 
         return
 
+    def on_action(self, c, e):
+        return self.on_pubmsg(c, e)
+
 if __name__ == '__main__':
     command = { 'transitiontime': TRANSITION_TIME, 'on': True, 'bri': 254 } # transitiontime: decisecs
     """b = Bridge(BRIDGE_IP)
