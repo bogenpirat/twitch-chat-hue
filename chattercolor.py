@@ -55,7 +55,7 @@ if __name__ == '__main__':
         LIGHTS_TO_MANIPULATE = b.lights
 
     def set_color(color):
-        if not color and not re.match('^#?[0-9a-zA-Z]{6}$', color):
+        if not isinstance(color, str) or not re.match('^#?[0-9a-zA-Z]{6}$', color):
             return
 
         rgb = rgbhex2dec(color)
