@@ -2,6 +2,7 @@ from phue import Bridge
 import colorsys
 import irc.bot
 import os
+import re
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -54,6 +55,9 @@ if __name__ == '__main__':
         LIGHTS_TO_MANIPULATE = b.lights
 
     def set_color(color):
+        if not color and not re.match('^#?[0-9a-zA-Z]{6}$', color):
+            return
+
         rgb = rgbhex2dec(color)
         hsl = colorsys.rgb_to_hsv(rgb[0]/255, rgb[1]/255, rgb[2]/255)
 
