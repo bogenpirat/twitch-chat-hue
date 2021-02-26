@@ -73,7 +73,7 @@ if __name__ == '__main__':
             lights[l].transitiontime = TRANSITION_TIME
             lights[l].on = True
             lights[l].hue = hue
-            lights[l].brightness = bri
+            lights[l].brightness = 254 #bri
             lights[l].saturation = sat
 
     bot = TwitchBot(TWITCH_NICKNAME, TWITCH_OAUTH, TWITCH_CHANNEL, set_color)
