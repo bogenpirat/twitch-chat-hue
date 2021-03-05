@@ -1,8 +1,6 @@
 from logging import log
 from phue import Bridge
-import colorsys
 import os
-import re
 from dotenv import load_dotenv
 
 from twitchbot import TwitchBot
