@@ -21,6 +21,8 @@ TRANSITION_TIME=10
 note that transition time is in deciseconds (tenths of a second), so e.g. 10dsec = 1sec.
 
 # run the code
+on the first run, you need to pair the hue hub with the script. this is done by briefly pressing the link button on the device and then, within less than 30 seconds, running the script.
+
 from a terminal:
 ```
 python chattercolor.py
